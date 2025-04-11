@@ -25,7 +25,11 @@ Docker Compose version v2.3.3
 - 4.Using terraform to create define the deployment pipeline and component services related to applications on AWS
 
 ## Result
-- 1.pipeline
+- 1.Terraform apply
+
+![terraform_apply](images/terraform_apply.png)
+
+- 2.pipeline
 
 ![pipeline1](images/pipeline1.png)
 
@@ -33,15 +37,19 @@ Docker Compose version v2.3.3
 
 - 3.Logs and results
 Build the application image
+
 ![build_logs](images/build_step_logs.png)
 
 Test: Run unit tests
+
 ![test_step_logs](images/test_step_logs.png)
 
 Deploy on ECS cluster
+
 ![deploy_on_ecs_cluster](images/deploy_on_ecs_cluster.png)
 
 Final
+
 ![final_result](images/final_result.png)
 
-[text](https://sample-app.labs4aws.click/healthcheck)
+https://sample-app.labs4aws.click/healthcheck

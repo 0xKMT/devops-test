@@ -23,7 +23,7 @@
             "description": "all allow"
         }
     ],
-    "ecr_name": "devopstest-ecr",
+    "ecr_name": "devops-test",
     "ecr_tag_mutability": "MUTABLE",
     "ecr_encryption_type": "AES256",
     "ecr_scan_on_push": true,
@@ -33,7 +33,7 @@
     "ecs_launch_type": "FARGATE",
     "number_of_tasks": 2,
     "ecs_assign_public_ip": false,
-    "container_name": "devopstest-container",
+    "container_name": "devops-test",
     "container_port": 3000,
     "task_definition_family_name": "devopstest-task-defination",
     "ecs_compatibilities_type": [

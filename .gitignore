@@ -7,3 +7,7 @@ docker
 *.zip
 client_secrets.json
 mycreds.txt
+.terraform
+*.tfstate
+.terraform.lock.hcl
+*.tfstate.*

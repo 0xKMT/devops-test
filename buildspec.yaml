@@ -1,0 +1,44 @@
+version: 0.2
+
+env:
+  variables:
+    IMAGE_NAME: "devops-test"
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - ACCOUNT_ID=$(aws sts get-caller-identity --query Account --output text)
+      - aws ecr get-login-password --region ap-southeast-1 | docker login --username AWS --password-stdin $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_URI=$ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_NAME:$IMAGE_TAG
+
+  build:
+    commands:
+      - echo Build Docker image...
+      - docker build -t $IMAGE_URI .
+      - docker tag $IMAGE_URI $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_NAME:latest
+
+  post_build:
+    commands:
+      - echo Run unit tests...
+      - docker run --rm $IMAGE_URI poetry run pytest
+
+      - echo Pushing images to ECR...
+      - docker push $IMAGE_URI
+      - docker push $ACCOUNT_ID.dkr.ecr.ap-southeast-1.amazonaws.com/$IMAGE_NAME:latest
+
+      - echo Creating imagedefinitions.json...
+      - |
+        cat > imagedefinitions.json <<EOF
+        [
+          {
+            "name": "$IMAGE_NAME",
+            "imageUri": "$IMAGE_URI"
+          }
+        ]
+        EOF
+
+artifacts:
+  files:
+    - imagedefinitions.json

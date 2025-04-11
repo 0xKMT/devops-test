@@ -25,10 +25,7 @@ Docker Compose version v2.3.3
 - 4.Using terraform to create define the deployment pipeline and component services related to applications on AWS
 
 ## Result
-- 1.terraform apply
-
-
-- 2.pipeline
+- 1.pipeline
 
 ![pipeline1](images/pipeline1.png)
 

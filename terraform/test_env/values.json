@@ -73,7 +73,7 @@
     "source_provider": "CODEPIPELINE",
     "source_repo": "https://github.com/0xKMT/devops-test.git",
     "buildspec": "buildspec.yml",
-    "source_branch": "feature/devops",
+    "source_branch": "main",
     "compute_type": "BUILD_GENERAL1_SMALL",
     "type": "LINUX_CONTAINER",
     "image": "aws/codebuild/standard:7.0",
